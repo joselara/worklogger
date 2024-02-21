@@ -21,7 +21,8 @@ const headers = [
     },
     {
         label: "Actions",
-        column: (row) => `Edit`,
+        column: (row) =>
+            `<a class="border px-2 py-1 rounded" href="/contacts/edit/${row.id}">Edit</a>`,
     },
 ];
 </script>

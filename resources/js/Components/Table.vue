@@ -42,14 +42,17 @@ const getColumnValue = (row, header) => {
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr v-for="(row, index) in rows" :key="index">
+                            <tr
+                                v-for="(row, index) in rows"
+                                :key="index"
+                                class="hover:bg-gray-100"
+                            >
                                 <td
                                     v-for="(header, index) in headers"
                                     :key="index"
                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
-                                >
-                                    {{ getColumnValue(row, header) }}
-                                </td>
+                                    v-html="getColumnValue(row, header)"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
