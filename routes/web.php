@@ -24,6 +24,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/contacts', fn() => Inertia::render('Contact/Index', [
+    'contacts' => \App\Models\Contact::take(10)->get()
+]))->name('contact.index');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
