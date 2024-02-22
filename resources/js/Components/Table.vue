@@ -14,10 +14,10 @@ defineProps({
 
 const hasActions = computed(() => !!useSlots().actions);
 
-const getColumnValue = (row, header) => {
-    return typeof header.column === "function"
-        ? header.column(row)
-        : row[header.column];
+const getFieldValue = (row, header) => {
+    return typeof header.field === "function"
+        ? header.field(row)
+        : row[header.field];
 };
 </script>
 
@@ -59,7 +59,7 @@ const getColumnValue = (row, header) => {
                                     v-for="(header, index) in headers"
                                     :key="index"
                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
-                                    v-html="getColumnValue(row, header)"
+                                    v-html="getFieldValue(row, header)"
                                 ></td>
                                 <td
                                     v-if="hasActions"

@@ -10,15 +10,15 @@ defineProps({
 const headers = [
     {
         label: "Name",
-        column: (row) => `${row.first_name} ${row.last_name}`,
+        field: (row) => `${row.first_name} ${row.last_name}`,
     },
     {
         label: "Email",
-        column: "email",
+        field: "email",
     },
     {
         label: "Phone",
-        column: "phone",
+        field: "phone",
     },
 ];
 </script>
