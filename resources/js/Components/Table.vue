@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed, useSlots } from "vue";
 
 defineProps({
     headers: {
@@ -11,6 +11,8 @@ defineProps({
         required: true,
     },
 });
+
+const hasActions = computed(() => !!useSlots().actions);
 
 const getColumnValue = (row, header) => {
     return typeof header.column === "function"
@@ -39,6 +41,12 @@ const getColumnValue = (row, header) => {
                                 >
                                     {{ header.label }}
                                 </th>
+                                <th
+                                    v-if="hasActions"
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                                >
+                                    Actions
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -53,6 +61,12 @@ const getColumnValue = (row, header) => {
                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                                     v-html="getColumnValue(row, header)"
                                 ></td>
+                                <td
+                                    v-if="hasActions"
+                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+                                >
+                                    <slot name="actions" v-bind="row" />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
