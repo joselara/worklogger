@@ -27,6 +27,7 @@ const getFieldValue = (row, header) => {
             <div
                 class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
             >
+                <slot name="top" />
                 <div
                     class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg"
                 >
@@ -71,6 +72,7 @@ const getFieldValue = (row, header) => {
                         </tbody>
                     </table>
                 </div>
+                <slot name="bottom" />
             </div>
         </div>
     </div>
