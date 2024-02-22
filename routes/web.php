@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/contacts', fn() => Inertia::render('Contact/Index', [
-    'contacts' => \App\Models\Contact::take(10)->get()
-]))->name('contact.index');
+Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
 
 Route::middleware([
     'auth:sanctum',
