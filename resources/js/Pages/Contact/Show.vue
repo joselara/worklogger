@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { defineProps, computed } from "vue";
+import { computed } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import FormSection from "@/Components/FormSection.vue";
@@ -16,7 +16,16 @@ const props = defineProps({
 const form = useForm({
     first_name: props.contact.first_name,
     last_name: props.contact.last_name,
+    email: props.contact.email,
+    phone: props.contact.phone,
 });
+
+const updateContact = () => {
+    form.post(route("contact.update", props.contact.id), {
+        errorBag: "updateContact",
+        preserveScroll: true,
+    });
+};
 
 const fullName = computed(
     () => `${props.contact.first_name} ${props.contact.last_name}`
@@ -33,7 +42,7 @@ const fullName = computed(
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <FormSection>
+                <FormSection @submitted="updateContact">
                     <template #title>Update Contact</template>
 
                     <template #description>
@@ -65,6 +74,34 @@ const fullName = computed(
                             />
                             <InputError
                                 :message="form.errors.last_name"
+                                class="mt-2"
+                            />
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="email" value="Email" />
+                            <TextInput
+                                id="email"
+                                v-model="form.email"
+                                type="email"
+                                class="mt-1 block w-full"
+                            />
+                            <InputError
+                                :message="form.errors.email"
+                                class="mt-2"
+                            />
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="phone" value="Phone" />
+                            <TextInput
+                                id="phone"
+                                v-model="form.phone"
+                                type="text"
+                                class="mt-1 block w-full"
+                            />
+                            <InputError
+                                :message="form.errors.phone"
                                 class="mt-2"
                             />
                         </div>

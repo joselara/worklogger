@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contacts/update/{contact}', [ContactController::class, 'update'])->name('contact.update');
 
 Route::middleware([
     'auth:sanctum',
