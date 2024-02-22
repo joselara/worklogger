@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::get('/', function () {
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contacts/update/{contact}', [ContactController::class, 'update'])->name('contact.update');
+
+Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
 
 Route::middleware([
     'auth:sanctum',

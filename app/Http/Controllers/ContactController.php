@@ -12,10 +12,10 @@ class ContactController extends Controller
 {
     use RedirectsActions;
 
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Contact/Index', [
-            'contacts' => Contact::take(10)->get()
+            'contacts' => $request->user()->contacts()->take(10)->get()
         ]);
     }
 
