@@ -31,6 +31,9 @@ Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name
 Route::post('/contacts/update/{contact}', [ContactController::class, 'update'])->name('contact.update');
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');
+Route::post('/tasks/store', [TaskController::class, 'store'])->name('task.store');
+
 
 Route::middleware([
     'auth:sanctum',
