@@ -8,6 +8,7 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { titleCase } from "@/utils";
 
 const props = defineProps({
     contact: Object,
@@ -43,65 +44,35 @@ const fullName = computed(
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <FormSection @submitted="updateContact">
-                    <template #title>Update Contact</template>
+                    <template #title>Contact Details</template>
 
                     <template #description>
                         Update the contact's information.
                     </template>
 
                     <template #form>
-                        <div class="col-span-6 sm:col-span-4">
-                            <InputLabel for="first_name" value="First Name" />
+                        <div
+                            v-for="field in [
+                                'first_name',
+                                'last_name',
+                                'email',
+                                'phone',
+                            ]"
+                            :key="field"
+                            class="col-span-6 sm:col-span-4"
+                        >
+                            <InputLabel
+                                :for="field"
+                                :value="titleCase(field)"
+                            />
                             <TextInput
-                                id="first_name"
-                                v-model="form.first_name"
-                                type="text"
+                                :id="field"
+                                v-model="form[field]"
+                                :type="field === 'email' ? 'email' : 'text'"
                                 class="mt-1 block w-full"
                             />
                             <InputError
-                                :message="form.errors.first_name"
-                                class="mt-2"
-                            />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-4">
-                            <InputLabel for="last_name" value="Last Name" />
-                            <TextInput
-                                id="last_name"
-                                v-model="form.last_name"
-                                type="text"
-                                class="mt-1 block w-full"
-                            />
-                            <InputError
-                                :message="form.errors.last_name"
-                                class="mt-2"
-                            />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-4">
-                            <InputLabel for="email" value="Email" />
-                            <TextInput
-                                id="email"
-                                v-model="form.email"
-                                type="email"
-                                class="mt-1 block w-full"
-                            />
-                            <InputError
-                                :message="form.errors.email"
-                                class="mt-2"
-                            />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-4">
-                            <InputLabel for="phone" value="Phone" />
-                            <TextInput
-                                id="phone"
-                                v-model="form.phone"
-                                type="text"
-                                class="mt-1 block w-full"
-                            />
-                            <InputError
-                                :message="form.errors.phone"
+                                :message="form.errors[field]"
                                 class="mt-2"
                             />
                         </div>
