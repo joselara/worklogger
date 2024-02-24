@@ -26,15 +26,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
-Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
-Route::post('/contacts/update/{contact}', [ContactController::class, 'update'])->name('contact.update');
-
-Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
-Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');
-Route::post('/tasks/store', [TaskController::class, 'store'])->name('task.store');
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -43,4 +34,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
+    Route::post('/contacts/update/{contact}', [ContactController::class, 'update'])->name('contact.update');
+
+    Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');
+    Route::post('/tasks/store', [TaskController::class, 'store'])->name('task.store');
+
+
 });
