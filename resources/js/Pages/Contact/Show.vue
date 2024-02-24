@@ -22,7 +22,7 @@ const form = useForm({
 });
 
 const updateContact = () => {
-    form.post(route("contact.update", props.contact.id), {
+    form.put(route("contact.update", props.contact.id), {
         errorBag: "updateContact",
         preserveScroll: true,
     });
