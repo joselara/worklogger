@@ -37,11 +37,13 @@ Route::middleware([
 
     Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
-    Route::post('/contacts/update/{contact}', [ContactController::class, 'update'])->name('contact.update');
+    Route::put('/contacts/edit/{contact}', [ContactController::class, 'update'])->name('contact.update');
 
     Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');
-    Route::post('/tasks/store', [TaskController::class, 'store'])->name('task.store');
+    Route::post('/tasks', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/tasks/edit/{task}', [TaskController::class, 'show'])->name('task.show');
+    Route::put('/tasks/edit/{task}', [TaskController::class, 'update'])->name('task.update');
 
 
 });
