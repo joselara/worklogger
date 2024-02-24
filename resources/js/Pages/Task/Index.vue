@@ -3,6 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Link } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { truncate } from "@/utils";
 
 defineProps({
     tasks: Object,
@@ -16,7 +17,7 @@ const headers = [
     {
         label: "Description",
         field: (row) => {
-            return `${row.description.substring(0, 50)}...`;
+            return truncate(row.description);
         },
     },
     {
