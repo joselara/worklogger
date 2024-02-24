@@ -18,19 +18,43 @@ class TaskController extends Controller
 
     public function create()
     {
-        return Inertia::render('Task/Create');
+        return Inertia::render('Task/Form');
     }
 
     public function store(Request $request)
     {
         $validData = Validator::make($request->all(), [
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'description' => 'required|max:255',
-            'due_date' => 'required|date'
+            'completed_at' => 'nullable|date',
+            'completed' => 'boolean'
         ])->validateWithBag('createTask');
 
-        $request->user()->tasks()->create($validData);
+        $request->user()->tasks()->save(
+            Task::make($validData)
+        );
 
-        return redirect()->route('task.index');
+        return Inertia::location(route('task.index'));;
+    }
+
+    public function show(Task $task)
+    {
+        return Inertia::render('Task/Form', [
+            'task' => $task
+        ]);
+    }
+
+    public function update(Request $request, Task $task)
+    {
+        $validData = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'completed_at' => 'nullable|date',
+            'completed' => 'boolean'
+        ])->validateWithBag('updateTask');
+
+        $task->update($validData);
+
+        return Inertia::location(route('task.index'));
     }
 }
