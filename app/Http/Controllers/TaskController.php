@@ -34,7 +34,7 @@ class TaskController extends Controller
             Task::make($validData)
         );
 
-        return Inertia::location(route('task.index'));;
+        return Inertia::location(route('tasks.index'));;
     }
 
     public function show(Task $task)
@@ -55,6 +55,6 @@ class TaskController extends Controller
 
         $task->update($validData);
 
-        return Inertia::location(route('task.index'));
+        return Inertia::location(route('tasks.index'));
     }
 }
