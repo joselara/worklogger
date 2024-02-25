@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, computed, useSlots } from "vue";
 
-defineProps({
+const props = defineProps({
     headers: {
         type: Array,
         required: true,
@@ -9,6 +9,14 @@ defineProps({
     rows: {
         type: Array,
         required: true,
+    },
+    onRowClick: {
+        type: Function,
+        default: (row) => {},
+    },
+    rowClass: {
+        type: [String, Function],
+        default: "",
     },
 });
 
@@ -18,6 +26,12 @@ const getFieldValue = (row, header) => {
     return typeof header.field === "function"
         ? header.field(row)
         : row[header.field];
+};
+
+const getRowClass = (row) => {
+    return typeof props.rowClass === "function"
+        ? props.rowClass(row)
+        : props.rowClass;
 };
 </script>
 
@@ -55,6 +69,8 @@ const getFieldValue = (row, header) => {
                                 v-for="(row, index) in rows"
                                 :key="index"
                                 class="hover:bg-gray-100"
+                                @click="onRowClick(row)"
+                                :class="getRowClass(row)"
                             >
                                 <td
                                     v-for="(header, index) in headers"
