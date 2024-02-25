@@ -5,6 +5,7 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import TextareaInput from "@/Components/TextareaInput.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 
 defineProps({
@@ -53,7 +54,7 @@ defineEmits(["submit"]);
 
             <div class="col-span-6 sm:col-span-4">
                 <InputLabel for="description" value="Description" />
-                <TextInput
+                <TextareaInput
                     id="description"
                     v-model="form.description"
                     type="text"
