@@ -36,6 +36,8 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
     Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
     Route::put('/contacts/edit/{contact}', [ContactController::class, 'update'])->name('contact.update');
 
