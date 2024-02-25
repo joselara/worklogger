@@ -1,9 +1,8 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Table from "@/Components/Table.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { truncate } from "@/utils";
 
 defineProps({
     reports: Object,
@@ -48,6 +47,13 @@ const headers = [
         },
     },
 ];
+
+const rowClass = (row) => {
+    const baseClass = "cursor-pointer";
+    const colorClass = row.is_paid ? "bg-green-100" : "bg-red-100";
+
+    return `${baseClass} ${colorClass}`;
+};
 </script>
 
 <template>
@@ -60,23 +66,31 @@ const headers = [
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <Table :headers="headers" :rows="reports">
-                    <!-- <template #top>
+                <Table
+                    :headers="headers"
+                    :rows="reports"
+                    :onRowClick="
+                        (row) => router.visit(route('reports.show', row))
+                    "
+                    :rowClass="(row) => rowClass(row)"
+                >
+                    <template #top>
                         <div class="flex justify-end mb-4">
                             <PrimaryButton :href="route('reports.create')">
                                 Create Report
                             </PrimaryButton>
                         </div>
-                    </template> -->
+                    </template>
 
-                    <template v-slot:actions="row">
+                    <!-- Ref: @/Components/Table.vue issue -->
+                    <!-- <template v-slot:actions="row">
                         <Link
                             :href="`/report/edit/${row.id}`"
                             class="cursor-pointer text-indigo-600 hover:text-indigo-900"
                         >
                             Edit
                         </Link>
-                    </template>
+                    </template> -->
                 </Table>
             </div>
         </div>

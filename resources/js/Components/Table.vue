@@ -65,12 +65,18 @@ const getRowClass = (row) => {
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
+                            <!--
+                                TODO:
+                                Issue with the Table component and row click:
+                                Consider placing the row click functionality inside the 'td' element,
+                                but unsure about the availability of action fields in this context.
+                            -->
                             <tr
                                 v-for="(row, index) in rows"
                                 :key="index"
                                 class="hover:bg-gray-100"
-                                @click="onRowClick(row)"
                                 :class="getRowClass(row)"
+                                @click="onRowClick(row)"
                             >
                                 <td
                                     v-for="(header, index) in headers"
