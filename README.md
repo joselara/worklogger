@@ -93,7 +93,7 @@ Follow these steps to set up the Work Logger application on your local environme
 
 1. Register for an account or log in if you already have one.
 2. Create contacts and assign tasks to them.
-3. WIP: Log hours for each task.
+3. Log hours for each task.
 4. Todo: Generate reports to analyze completed tasks.
 5. Todo: Integrate with Stripe API for payment processing.
 
