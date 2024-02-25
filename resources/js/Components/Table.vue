@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, computed, useSlots } from "vue";
+import { getFieldFromObject } from "@/utils";
 
 const props = defineProps({
     headers: {
@@ -23,9 +24,7 @@ const props = defineProps({
 const hasActions = computed(() => !!useSlots().actions);
 
 const getFieldValue = (row, header) => {
-    return typeof header.field === "function"
-        ? header.field(row)
-        : row[header.field];
+    return getFieldFromObject(row, header.field);
 };
 
 const getRowClass = (row) => {

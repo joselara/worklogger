@@ -26,3 +26,7 @@ export function truncate(
 
     return input.substring(0, maxLength) + "...";
 }
+
+export function getFieldFromObject(row, field) {
+    return typeof field === "function" ? field(row) : row[field];
+}
