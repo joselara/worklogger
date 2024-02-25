@@ -17,14 +17,14 @@ const form = useForm({
 });
 
 const createContact = () => {
-    form.post(route("contact.store"), {
+    form.post(route("contacts.store"), {
         errorBag: "createContact",
         preserveScroll: true,
     });
 };
 
 const updateContact = () => {
-    form.put(route("contact.update", props.contact.id), {
+    form.put(route("contacts.update", props.contact.id), {
         errorBag: "updateContact",
         preserveScroll: true,
     });

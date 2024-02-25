@@ -17,7 +17,7 @@ const form = useForm({
 });
 
 const createTask = () => {
-    form.post(route("task.store"), {
+    form.post(route("tasks.store"), {
         errorBag: "createTask",
         preserveScroll: true,
         onSuccess: () => {},
@@ -25,7 +25,7 @@ const createTask = () => {
 };
 
 const updateTask = () => {
-    form.put(route("task.update", form.id), {
+    form.put(route("tasks.update", form.id), {
         errorBag: "updateTask",
         preserveScroll: true,
         onSuccess: () => {},

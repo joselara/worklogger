@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TaskController;
 
 /*
@@ -35,17 +36,10 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
-    Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
-    Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
-    Route::get('/contacts/edit/{contact}', [ContactController::class, 'show'])->name('contact.show');
-    Route::put('/contacts/edit/{contact}', [ContactController::class, 'update'])->name('contact.update');
 
-    Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
-    Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');
-    Route::post('/tasks', [TaskController::class, 'store'])->name('task.store');
-    Route::get('/tasks/edit/{task}', [TaskController::class, 'show'])->name('task.show');
-    Route::put('/tasks/edit/{task}', [TaskController::class, 'update'])->name('task.update');
-
-
+    Route::resources([
+        'contacts' => ContactController::class,
+        'tasks' => TaskController::class,
+        'reports' => ReportController::class
+    ]);
 });

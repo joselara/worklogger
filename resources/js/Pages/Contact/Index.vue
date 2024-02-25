@@ -37,7 +37,7 @@ const headers = [
                 <Table :headers="headers" :rows="contacts">
                     <template #top>
                         <div class="flex justify-end mb-4">
-                            <PrimaryButton :href="route('contact.create')">
+                            <PrimaryButton :href="route('contacts.create')">
                                 Create Contact
                             </PrimaryButton>
                         </div>

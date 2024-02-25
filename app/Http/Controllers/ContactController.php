@@ -41,7 +41,7 @@ class ContactController extends Controller
             Contact::make($validData)
         );
 
-        return Inertia::location(route('contact.index'));
+        return Inertia::location(route('contacts.index'));
     }
 
     public function update(Request $request, Contact $contact)

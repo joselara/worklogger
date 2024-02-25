@@ -50,7 +50,7 @@ const headers = [
                 <Table :headers="headers" :rows="tasks">
                     <template #top>
                         <div class="flex justify-end mb-4">
-                            <PrimaryButton :href="route('task.create')">
+                            <PrimaryButton :href="route('tasks.create')">
                                 Create Task
                             </PrimaryButton>
                         </div>
