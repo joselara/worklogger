@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Table from "@/Components/Table.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link } from "@inertiajs/vue3";
 
 defineProps({
@@ -34,6 +35,13 @@ const headers = [
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <Table :headers="headers" :rows="contacts">
+                    <template #top>
+                        <div class="flex justify-end mb-4">
+                            <PrimaryButton :href="route('contact.create')">
+                                Create Contact
+                            </PrimaryButton>
+                        </div>
+                    </template>
                     <template v-slot:actions="row">
                         <Link
                             :href="`/contacts/edit/${row.id}`"
