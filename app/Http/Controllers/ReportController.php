@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -34,10 +35,11 @@ class ReportController extends Controller
     public function show(Report $report)
     {
         // Ensure authorization to view this report if needed
+        $report = $report->load('tasks');
 
-        return Inertia::render('Report/Show', [
-            'report' => $report->load('tasks') // Eager load related tasks
-        ]);
+        $report->tasks_count = $report->tasks->count();
+
+        return Inertia::render('Report/Show', compact('report'));
     }
 
     public function update(Request $request, Report $report)
